@@ -1,6 +1,6 @@
 use Test::More;
 
-use immutable 'imap';
+use immutable ':all';
 
 use XXX;
 

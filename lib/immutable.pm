@@ -16,6 +16,8 @@ our @EXPORT_OK = qw(
     ibool
 );
 
+our %EXPORT_TAGS = ( all => [ @EXPORT_OK ] );
+
 sub _todo {
     die "${\ (caller(1))[3]} not yet implemented";
 }
@@ -24,6 +26,7 @@ sub iobj {
     my $type = ref($_[0]);
     return
         $type eq 'HASH' ? imap(%{$_[0]}) :
+        $type eq 'ARRAY' ? iseq(@{$_[0]}) :
         die "Invalid arguments for iobj";
 }
 

@@ -1,4 +1,11 @@
 ---
+version: 0.0.2
+date:    Sun Jun 25 01:25:12 PM EDT 2023
+changes:
+- Add dependency modules to Meta
+- Add the :all export tag to immutable.pm
+- Write more documentation
+---
 version: 0.0.1
 date:    Sun Jun 25 11:23:44 AM EDT 2023
 changes:

@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package immutable;
 
-our $VERSION = '0.0.1';
+our $VERSION = '0.0.2';
 
 use Exporter 'import';
 

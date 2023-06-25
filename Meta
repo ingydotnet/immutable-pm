@@ -22,6 +22,8 @@ devel:
 
 requires:
   perl: 5.16.0
+  Hash::Ordered: '0.014'
+  Scalar::Util: '1.63'
 
 =zild:
   no-about: true

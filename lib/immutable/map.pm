@@ -31,6 +31,8 @@ sub CLEAR {
 
 package immutable::map;
 
+use Carp 'croak';
+
 use Scalar::Util 'refaddr';
 
 use overload
@@ -69,6 +71,12 @@ sub del {
     tied(%hash)->delete(@_);
     bless \%hash, ref($self);
 }
+
+# sub equal_to {
+#     my ($self, $iobj) = @_;
+#     return unless ref($self) eq ref($iobj);
+#     croak "equal_to";
+# }
 
 # sub clone {
 #     shift->set();

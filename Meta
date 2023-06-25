@@ -1,0 +1,30 @@
+=meta: 0.0.2
+
+name: immutable
+version: 0.0.1
+abstract: Immutable Data Structures for Perl
+homepage: https://metacpan.org/release/immutable
+language: perl
+license: perl
+copyright: 2023
+
+author:
+  name: Ingy döt Net
+  email: ingy@cpan.org
+  homepage: http://ingy.net
+  github: ingydotnet
+  twitter: ingydotnet
+  freenode: ingy
+
+devel:
+  git: https://github.com/ingydotnet/immutable-pm
+  bug: https://github.com/ingydotnet/immutable-pm/issues
+
+requires:
+  perl: 5.16.0
+
+=zild:
+  no-about: true
+  no-readme: true
+  no-travis: true
+  test-000: none

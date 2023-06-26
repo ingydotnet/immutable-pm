@@ -7,7 +7,7 @@ Immutable Data Structures for Perl
 # Synopsis
 
 ```
-use immutable ':all';
+use immutable::0 ':all';
 
 $hash1 = imap(k1 => 123, k2 => 456);
 $k1 = $hash->{k1};                      # 123
@@ -53,19 +53,27 @@ immutable objects.
 
   Create an immutable object from a plain scalar object.
 
-  `$ihash = iobj $hash;`
+  `$i_hash = iobj $hash;`
 
 * `imap`
 
   Create an immutable hash (`immutable::map`) object.
   Takes an even number (0 to n) of key and value arguments.
 
-  * `$ihash = imap;`      # Empty hash
-  * `$ihash = imap x => 1, y => 2;
+  * `$i_hash = imap;`      # Empty hash
+  * `$i_hash = imap x => 1, y => 2;`
 
 * `iseq`
 
-  Immutable array. Not implemented yet.
+  Create an immutable array (`immutable::seq`) object.
+  Takes 0 or more scalar values to initialize the array.
+
+  * `$i_array = iseq;`      # Empty array
+  * `$i_array = iseq 1, 2, 3;`
+
+* `iset`
+
+  Immutable set object. Not implemented yet.
 
 * `ilist`
 
@@ -135,6 +143,60 @@ functions appropriately.
 * `$imap->is_empty`
 
   Returns true if the map is empty.
+
+
+## `immutable::seq`
+
+* `new`
+
+  Takes a list of zero or more scalars.
+  Returns a new `immutable::seq` arrayref object that is also tied.
+
+* `$iseq->[$i]`
+
+  Get the array/seq value associated with the index.
+
+* `$iseq->get($i)`
+
+  Same as above using method call.
+
+* `$iseq->[$i] = $val`
+
+  Not allowed. Throws an error.
+
+* `$iseq->set($i => $value)`
+
+  Returns a clone of the seq with the value at the index position.
+
+* `$iseq->push($val, ...)`
+
+  Returns a clone of the seq with the values appended.
+
+* `$iseq->pop`
+
+  In scalar context, returns a clone of the seq with the last value removed.
+  In list context, returns the clone and the value removed.
+
+* `$iseq->shift`
+
+  In scalar context, returns a clone of the seq with the first value removed.
+  In list context, returns the clone and the value removed.
+
+* `$iseq->unshift($val, ...)`
+
+  Returns a clone of the seq with the values appended.
+
+* `$iseq->id`
+
+  Returns an integer id number for the seq.
+
+* `$iseq->size`
+
+  Returns the number of values in the seq.
+
+* `$iseq->is_empty`
+
+  Returns true if the seq is empty.
 
 
 # Status

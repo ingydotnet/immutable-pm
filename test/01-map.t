@@ -1,12 +1,11 @@
+use strict; use warnings;
 use Test::More;
 
-use immutable ':all';
-
-use XXX;
+use immutable::0 ':all';
 
 
 
-my $m1 = imap();
+my $m1 = iobj {};
 
 ok $m1->is_empty,
     '$m->is_empty works on empty map';
@@ -14,7 +13,7 @@ ok $m1->is_empty,
 is $m1->size, 0,
     '->size of empty map is 0';
 
-eval { $m1->{foo} = 1 };
+eval { $m1->{x} = 111 };
 
 like $@, qr{^Not valid to set a key/value on an immutable::map object},
     "Adding data to a map causes an error";
@@ -37,7 +36,7 @@ ok $m1->is_empty,
 is $m2->get('x'), 111,
    'New map has key from method access';
 
-is $m2->get('x'), 111,
+is $m2->{x}, 111,
    'New map has key from tied access';
 
 
@@ -50,7 +49,7 @@ like $@, qr{^Not valid to delete a key from an immutable::map object},
 my $m3 = $m2->del('x');
 
 is $m2->{x}, 111,
-    "Key not delete from original";
+    "Key not deleted from original";
 
 ok $m3->is_empty,
     "Key deleted from new object";

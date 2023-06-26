@@ -5,48 +5,26 @@ package immutable::map;
 
 package immutable::map::tied;
 use base 'Hash::Ordered';
+use immutable::tied;
 
-use Carp 'croak';
+sub import {
+    die "Don't 'use immutable::map' directly";
+}
+
 
 # Prevent tied changes to immutable::map.
 # Mutation operations must use method calls which will return a new map.
 
-sub STORE {
-    croak
-        "Not valid to set a key/value on an immutable::map object.\n" .
-        "Try '->set(\$key, \$val)' which returns a new immutable::map.\n";
-}
+sub STORE { err 'set a key/value on', '->set($key, $val)' }
+sub DELETE { err 'delete a key from', '->del($key)' }
 
-sub DELETE {
-    croak
-        "Not valid to delete a key from an immutable::map object.\n" .
-        "Try '->del(\$key)' which returns a new immutable::map.\n";
-}
-
-sub CLEAR {
-    croak "Invalid CLEAR called on immutable::map object.\n";
-}
+sub CLEAR { err }
 
 
 
 package immutable::map;
-
-use Carp 'croak';
-
-use Scalar::Util 'refaddr';
-
-use overload
-    q{""} => sub {
-        my ($self) = @_;
-        "<${\ __PACKAGE__} ${\ $self->size} ${\ refaddr $self}>";
-    },
-    q{0+} => sub {
-        $_[0]->size;
-    },
-    q{bool} => sub {
-        !! $_[0]->size;
-    },
-    fallback => 1;
+use immutable::base;
+use base 'immutable::base';
 
 sub new {
     my $class = shift;
@@ -77,26 +55,8 @@ sub del {
     bless \%hash, ref($self);
 }
 
-# sub equal_to {
-#     my ($self, $iobj) = @_;
-#     return unless ref($self) eq ref($iobj);
-#     croak "equal_to";
-# }
-
-# sub clone {
-#     shift->set();
-# }
-
-sub id {
-    refaddr($_[0]);
-}
-
 sub size {
     0 + @{tied(%{$_[0]})->[1]};
-}
-
-sub is_empty {
-    $_[0]->size == 0;
 }
 
 sub DESTROY {
@@ -106,9 +66,8 @@ sub DESTROY {
 # TODO should not proxy mutating methods.
 our $AUTOLOAD;
 sub AUTOLOAD {
-    my $self = shift;
     (my $method = $AUTOLOAD) =~ s/^.*:://;
-    tied(%$self)->$method(@_);
+    tied(%{shift()})->$method(@_);
 }
 
 1;

@@ -1,4 +1,10 @@
 ---
+version: 0.0.3
+date:    Sun Jun 25 08:43:17 PM EDT 2023
+changes:
+- Fix to make ->set preserve key order
+- Add install to Makefile
+---
 version: 0.0.2
 date:    Sun Jun 25 01:25:12 PM EDT 2023
 changes:

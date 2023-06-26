@@ -1,4 +1,9 @@
 ---
+version: 0.0.4
+date:    Mon Jun 26 04:22:07 PM EDT 2023
+changes:
+- Add immutable::seq support
+---
 version: 0.0.3
 date:    Sun Jun 25 08:43:17 PM EDT 2023
 changes:

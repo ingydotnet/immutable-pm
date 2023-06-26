@@ -1,7 +1,7 @@
 =meta: 0.0.2
 
 name: immutable
-version: 0.0.3
+version: 0.0.4
 abstract: Immutable Data Structures for Perl
 homepage: https://metacpan.org/release/immutable
 language: perl
@@ -24,6 +24,7 @@ requires:
   perl: 5.16.0
   Hash::Ordered: '0.014'
   Scalar::Util: '1.63'
+  Tie::Array: '0.0'
 
 =zild:
   no-about: true

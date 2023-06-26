@@ -61,7 +61,12 @@ sub get {
 sub set {
     my $self = shift;
     tie my %hash, 'immutable::map::tied', %$self;
-    tied(%hash)->push(@_);
+    if (@_ == 2) {
+        tied(%hash)->set(@_);
+    }
+    else {
+        tied(%hash)->push(@_);
+    }
     bless \%hash, ref($self);
 }
 

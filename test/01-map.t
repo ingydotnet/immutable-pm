@@ -83,4 +83,10 @@ is join(',', $m5->keys), 'x,y,aaa,bbb',
 
 
 
+my $m6 = $m5->set(x => 1234);
+is join(',', $m5->keys), 'x,y,aaa,bbb',
+    "->set() preserves key order";
+
+
+
 done_testing;

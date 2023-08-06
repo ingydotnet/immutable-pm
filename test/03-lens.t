@@ -43,6 +43,14 @@ is $street_number_lens->view($street), 10,
 }
 
 {
+  my $new_street = $street_number_lens->modify($street, sub {$_[0] * 2});
+  is $new_street->{'number'}, 20,
+    'modify passes the current value';
+  is $street_number_lens->view($new_street), 20,
+    'modify passes the current value';
+}
+
+{
   my $address_street = $address_street_lens->view($address);
   is $address_street, $street,
     'can view an object through a lens';
@@ -77,6 +85,15 @@ is $street_number_lens->view($street), 10,
     'viewed element was updated after composed set';
   is $street_number_lens->view($new_street), 11,
     'reapplying a second view gets the proper deep updated object';
+}
+
+{
+  my $composed = $address_street_lens->compose($street_number_lens);
+  my $new_address = $composed->modify($address, sub { $_[0] * 2 });
+  is $composed->view($address), 10,
+    'composed lens left original unchanged';
+  is $composed->view($new_address), 20,
+    'lens property updated a nested object';
 }
 
 done_testing;

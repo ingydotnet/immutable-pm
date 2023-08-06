@@ -16,6 +16,11 @@ sub set {
   $self->{'set'}($obj, $value);
 }
 
+sub modify {
+  my ($self, $obj, $fn) = @_;
+  $self->set($obj, $fn->($self->view($obj)));
+}
+
 sub compose {
   my ($self, $other) = @_;
   die "Can only compose lenses together" unless ref($self) eq ref($other);

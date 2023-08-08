@@ -8,12 +8,12 @@ sub make {
 
 sub view {
   my ($self, $obj) = @_;
-  $self->{'view'}($obj);
+  $self->{view}($obj);
 }
 
 sub set {
   my ($self, $obj, $value) = @_;
-  $self->{'set'}($obj, $value);
+  $self->{set}($obj, $value);
 }
 
 sub modify {
